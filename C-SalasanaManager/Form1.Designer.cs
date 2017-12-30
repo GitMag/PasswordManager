@@ -36,10 +36,10 @@
             this.ListboxSite = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.ButttonSearchItem = new System.Windows.Forms.Button();
             this.ButtonAddItem = new System.Windows.Forms.Button();
             this.ButtonDeleteItem = new System.Windows.Forms.Button();
-            this.ButtonEditItem = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -120,10 +120,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonSettings);
             this.groupBox2.Controls.Add(this.ButttonSearchItem);
             this.groupBox2.Controls.Add(this.ButtonAddItem);
             this.groupBox2.Controls.Add(this.ButtonDeleteItem);
-            this.groupBox2.Controls.Add(this.ButtonEditItem);
             this.groupBox2.Location = new System.Drawing.Point(264, 213);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(215, 184);
@@ -131,10 +131,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Työkalut";
             // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSettings.Location = new System.Drawing.Point(6, 142);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(197, 35);
+            this.buttonSettings.TabIndex = 4;
+            this.buttonSettings.Text = "Asetukset";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // ButttonSearchItem
             // 
             this.ButttonSearchItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButttonSearchItem.Location = new System.Drawing.Point(12, 142);
+            this.ButttonSearchItem.Location = new System.Drawing.Point(6, 101);
             this.ButttonSearchItem.Name = "ButttonSearchItem";
             this.ButttonSearchItem.Size = new System.Drawing.Size(197, 35);
             this.ButttonSearchItem.TabIndex = 3;
@@ -144,7 +155,7 @@
             // ButtonAddItem
             // 
             this.ButtonAddItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonAddItem.Location = new System.Drawing.Point(12, 101);
+            this.ButtonAddItem.Location = new System.Drawing.Point(6, 60);
             this.ButtonAddItem.Name = "ButtonAddItem";
             this.ButtonAddItem.Size = new System.Drawing.Size(197, 35);
             this.ButtonAddItem.TabIndex = 2;
@@ -155,24 +166,13 @@
             // ButtonDeleteItem
             // 
             this.ButtonDeleteItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonDeleteItem.Location = new System.Drawing.Point(12, 60);
+            this.ButtonDeleteItem.Location = new System.Drawing.Point(6, 19);
             this.ButtonDeleteItem.Name = "ButtonDeleteItem";
             this.ButtonDeleteItem.Size = new System.Drawing.Size(197, 35);
             this.ButtonDeleteItem.TabIndex = 1;
             this.ButtonDeleteItem.Text = "Poista Valittu";
             this.ButtonDeleteItem.UseVisualStyleBackColor = true;
             this.ButtonDeleteItem.Click += new System.EventHandler(this.ButtonDeleteItem_Click);
-            // 
-            // ButtonEditItem
-            // 
-            this.ButtonEditItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonEditItem.Location = new System.Drawing.Point(12, 19);
-            this.ButtonEditItem.Name = "ButtonEditItem";
-            this.ButtonEditItem.Size = new System.Drawing.Size(197, 35);
-            this.ButtonEditItem.TabIndex = 0;
-            this.ButtonEditItem.Text = "Muokkaa valittua";
-            this.ButtonEditItem.UseVisualStyleBackColor = true;
-            this.ButtonEditItem.Click += new System.EventHandler(this.ButtonEditItem_Click);
             // 
             // MainForm
             // 
@@ -192,6 +192,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Salasana Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -213,8 +214,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button ButtonAddItem;
         private System.Windows.Forms.Button ButtonDeleteItem;
-        private System.Windows.Forms.Button ButtonEditItem;
         private System.Windows.Forms.Button ButttonSearchItem;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }
 

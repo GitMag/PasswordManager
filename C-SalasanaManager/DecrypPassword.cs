@@ -19,7 +19,28 @@ namespace C_SalasanaManager
 
         private void ButtonDecrypt_Click(object sender, EventArgs e)
         {
-            //PublicValues.key = "";
+            GlobalVariables.DecryptKey = TextBoxKey.Text;
+            this.Close();
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default["UploadFTP"] = false; 
+            Properties.Settings.Default.Save();
+            Application.Restart();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+        }
+
+        private void DecryptPassword_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default["UploadFTP"].ToString() == "True")
+            {
+                ButtonUseLocal.Visible = true;
+            }
         }
     }
 }

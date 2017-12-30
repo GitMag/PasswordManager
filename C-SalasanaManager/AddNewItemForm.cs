@@ -21,11 +21,19 @@ namespace C_SalasanaManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-          password = CreatePassword(Convert.ToInt32(NumericUDlenght.Value)); //create and get password to string. lenght accoring to selection
-            File.AppendAllText(@"D:\c-salasanamanager\password.txt", password + Environment.NewLine); //add password to password text file
-            File.AppendAllText(@"D:\c-salasanamanager\username.txt", TextBoxUsername.Text + Environment.NewLine); //add Username to text file
-            File.AppendAllText(@"D:\c-salasanamanager\site.txt", TextBoxSiteName.Text + Environment.NewLine); //add site name to text file
+            if (textBoxOldPass.Text == "") //test if user wants to user existring password
+            {        
+            password = CreatePassword(Convert.ToInt32(NumericUDlenght.Value)); //create and get password to string. lenght accoring to selection
+            }
+            else
+            {
+                password = textBoxOldPass.Text; //Use existing password from textbox
+            }
+            File.AppendAllText(GlobalVariables.AppConfigLoc + "password.txt", StringCipher.Encrypt(password,GlobalVariables.DecryptKey) + Environment.NewLine); //add password to password text file
+            File.AppendAllText(GlobalVariables.AppConfigLoc + "username.txt", TextBoxUsername.Text + Environment.NewLine); //add Username to text file
+            File.AppendAllText(GlobalVariables.AppConfigLoc + "site.txt", TextBoxSiteName.Text + Environment.NewLine); //add site name to text file
             this.Close();
+
         }
 
             public string CreatePassword(int length) 
