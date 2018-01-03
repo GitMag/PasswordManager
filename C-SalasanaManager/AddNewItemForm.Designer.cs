@@ -40,10 +40,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBoxOldPass = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxOldPass = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -184,6 +184,16 @@
             this.tabPage1.Text = "Luo uusi";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 11);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 25);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Pituus:";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label6);
@@ -197,14 +207,6 @@
             this.tabPage2.Text = "Käytä vanhaa";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBoxOldPass
-            // 
-            this.textBoxOldPass.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxOldPass.Location = new System.Drawing.Point(5, 39);
-            this.textBoxOldPass.Name = "textBoxOldPass";
-            this.textBoxOldPass.Size = new System.Drawing.Size(274, 29);
-            this.textBoxOldPass.TabIndex = 5;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -215,15 +217,13 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Vanha salasana:";
             // 
-            // label7
+            // textBoxOldPass
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 11);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 25);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Pituus:";
+            this.textBoxOldPass.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxOldPass.Location = new System.Drawing.Point(5, 39);
+            this.textBoxOldPass.Name = "textBoxOldPass";
+            this.textBoxOldPass.Size = new System.Drawing.Size(274, 29);
+            this.textBoxOldPass.TabIndex = 5;
             // 
             // AddNewItemForm
             // 
@@ -241,7 +241,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddNewItemForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddNewItemForm";
+            this.Text = "Lisää uusi salasana:";
             ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

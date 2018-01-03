@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TextBoxPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -151,6 +152,7 @@
             this.ButttonSearchItem.TabIndex = 3;
             this.ButttonSearchItem.Text = "Hae";
             this.ButttonSearchItem.UseVisualStyleBackColor = true;
+            this.ButttonSearchItem.Click += new System.EventHandler(this.ButttonSearchItem_Click);
             // 
             // ButtonAddItem
             // 
@@ -186,6 +188,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

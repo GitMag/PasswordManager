@@ -9,6 +9,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Resources;
 
 namespace C_SalasanaManager
 {
@@ -17,8 +19,8 @@ namespace C_SalasanaManager
         string Username; // Read username from file based on Selected site
         string Password;
         string site;
-        string useFTP = Properties.Settings.Default["UploadFTP"].ToString();
         string FTPpass;
+        string testDecrypt;
         public MainForm()
         {
             InitializeComponent();
@@ -26,13 +28,53 @@ namespace C_SalasanaManager
         private void MainForm_Load(object sender, EventArgs e)
         {
             Directory.CreateDirectory(GlobalVariables.AppConfigLoc); //create directory where profiles are saved
-            NeedKey();
+
+            
+            if (File.Exists(GlobalVariables.AppConfigLoc + "site.txt") == false) //check if this is first run
+            {
+                using (FirstRun FirstRun = new FirstRun()) //open decrypt form to decrypt passwords with master key
+                {
+                    FirstRun.ShowDialog(this);
+                    loadtext();
+                }
+            }
+            else //if not first run
+            {
+                NeedKey();
+            }         
+            LoadSettings();
+            TestPass();
+        }
+        void LoadSettings()
+        {
+            if (Properties.Settings.Default["PasswordPlainText"].ToString() == "False") //check if password should be displayed in plain text
+            {
+                TextBoxPassword.PasswordChar = '*';
+            }
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UploadFTP();
+            if (GlobalVariables.AllowExit == false)
+            {
+                if (Properties.Settings.Default["UploadFTP"].ToString() == "True")
+                {
+                    UploadFTP();
+                 }
+            }
         }
-              
+        void TestPass() //test if the password the user gave is correct
+        {
+            try
+            {
+                testDecrypt = File.ReadAllText(GlobalVariables.AppConfigLoc + "pswdTest.txt"); //This is used to test if key is correct
+                testDecrypt = StringCipher.Decrypt(testDecrypt, GlobalVariables.DecryptKey); //try to decrypt key
+            }
+            catch (Exception)
+            {
+
+                NeedKey();
+            }
+        }
         void loadtext()
         {
             ListboxSite.DataSource = File.ReadAllLines(GlobalVariables.AppConfigLoc + "site.txt");
@@ -42,7 +84,7 @@ namespace C_SalasanaManager
             using (DecryptPassword form = new DecryptPassword()) //open decrypt form to decrypt passwords with master key
             {
                 form.ShowDialog(this);
-                if (useFTP == "True") //chek if we should load files from ftp
+                if (Properties.Settings.Default["UploadFTP"].ToString() == "True") //chek if we should load files from ftp
                 {
                     //load files from ftp
                     DownloadFTP();
@@ -52,7 +94,8 @@ namespace C_SalasanaManager
                     loadtext(); //load text from file to Site list
                     LoadUserDetails();
                 }
-                 
+                TestPass(); //test if password is correct
+                LoadUserDetails();
             }
         }
         private void ListboxSite_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,31 +126,28 @@ namespace C_SalasanaManager
         }
         void UploadFTP() //Upload files to server
         {
-            try
-            {
-                if (FTPpass == "")
-                {
-                    FTPpass = File.ReadLines(GlobalVariables.AppConfigLoc + "FTPpass.txt").Skip(GlobalVariables.CurrentItem).Take(1).First(); //get encrypted ftp password from file
-                    FTPpass = StringCipher.Decrypt(FTPpass, GlobalVariables.DecryptKey); //try to decrypt password using key
-                }
+          //  try
+           // {
+                FTPpass = File.ReadLines(GlobalVariables.AppConfigLoc + "FTPpass.txt").Skip(GlobalVariables.CurrentItem).Take(1).First(); //get encrypted ftp password from file
+                FTPpass = StringCipher.Decrypt(FTPpass, GlobalVariables.DecryptKey); //try to decrypt password using key              
                 WebClient client = new WebClient();
                 client.Credentials = new NetworkCredential(Properties.Settings.Default["FTPuser"].ToString(), FTPpass);
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/site.txt", GlobalVariables.AppConfigLoc + "site.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/username.txt", GlobalVariables.AppConfigLoc + "username.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/password.txt", GlobalVariables.AppConfigLoc + "password.txt");
                 client.Dispose();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Salasanojen synkronointi FTP-palvelimelle epäonnistui. Tarkista onko kaikki FTP tunnuksesi oikein. Jos haluat pitää tämän istunnon muutokset" +
-                    "niin paina 'Käytä paikallista salasanavarastoa' ensi istunnon alussa ja korjaa FTP-tunnukset.");
-            }
+           // }
+           // catch (Exception)
+           // {
+               // MessageBox.Show("Salasanojen synkronointi FTP-palvelimelle epäonnistui. Tarkista onko kaikki FTP tunnuksesi oikein. Jos haluat pitää tämän istunnon muutokset" +
+                 //   "niin paina 'Käytä paikallista salasanavarastoa' ensi istunnon alussa ja korjaa FTP-tunnukset.");
+          //  }
         }
         void LoadUserDetails() // Load Username an Password to Textbox
         {
-            if (GlobalVariables.DecryptKey != "")
-            {
-            try
+            if (testDecrypt == "test")
+            { // 
+                try
             {
                 GlobalVariables.CurrentItem = ListboxSite.SelectedIndex;
                 Username = File.ReadLines(GlobalVariables.AppConfigLoc + "username.txt").Skip(GlobalVariables.CurrentItem).Take(1).First();
@@ -119,22 +159,20 @@ namespace C_SalasanaManager
                 TextBoxPassword.Text = Password;
                 site = ListboxSite.SelectedItem.ToString();
                 Console.WriteLine(site);
+
+
                     //settings test
                     if (Properties.Settings.Default["CopyClipboard"].ToString() == "True")
                     {
                         Clipboard.SetText(Password);
                     }
-            }
+                }
             catch (Exception)
             {
-                    if(ListboxSite.Items.Count != 0)
-                    {
-                        NeedKey();
-                    }
-            }
-        }
-        }
-
+                        
+            }                                        
+                }                               
+            }      
         private void ButtonAddItem_Click(object sender, EventArgs e)
         {
             using (AddNewItemForm f2 = new AddNewItemForm())
@@ -181,11 +219,31 @@ namespace C_SalasanaManager
                 settings.ShowDialog(this);
             }
         }
+
+        private void ButttonSearchItem_Click(object sender, EventArgs e)
+        {
+            using (SearchSite search = new SearchSite())
+            {
+                search.ShowDialog(this);
+                int index = ListboxSite.FindString(GlobalVariables.SearchString);
+                if (index != -1)
+                {
+                    ListboxSite.SetSelected(index, true);
+                }
+                else
+                {
+                    MessageBox.Show("Hakutuloksia ei löytynyt");
+                }
+            }            
+        }
+            
     }
     public static class GlobalVariables //can be accesed from anywhere
     {
         public static string DecryptKey; //Key used to encrypt and decrypt passwords
         public static int CurrentItem; //Current slected listbox item
         public static string AppConfigLoc = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\PasswordManager\";
+        public static bool AllowExit = false; //Variable that allows instant exit whitout uploading ftp
+        public static string SearchString;
     }
 }

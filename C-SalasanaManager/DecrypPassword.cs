@@ -25,7 +25,8 @@ namespace C_SalasanaManager
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default["UploadFTP"] = false; 
+            Properties.Settings.Default["UploadFTP"] = false;
+            GlobalVariables.AllowExit = true;
             Properties.Settings.Default.Save();
             Application.Restart();
         }

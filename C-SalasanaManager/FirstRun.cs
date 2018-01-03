@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace C_SalasanaManager
 {
@@ -15,6 +16,21 @@ namespace C_SalasanaManager
         public FirstRun()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBoxPswd.Text == textBoxPswdAgain.Text) //check if passwords match
+            {
+                Properties.Settings.Default.Save(); //save settings
+                using (File.Create(GlobalVariables.AppConfigLoc + "site.txt"))
+                File.WriteAllText(GlobalVariables.AppConfigLoc + "pswdTest.txt", StringCipher.Encrypt("test", textBoxPswd.Text));
+                Application.Restart();          
+            }
+            else
+            {
+                MessageBox.Show("Salasanat eivät täsmää!");
+            }
         }
     }
 }

@@ -70,5 +70,17 @@ namespace C_SalasanaManager.Properties {
                 this["CopyClipboard"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PasswordPlainText {
+            get {
+                return ((bool)(this["PasswordPlainText"]));
+            }
+            set {
+                this["PasswordPlainText"] = value;
+            }
+        }
     }
 }

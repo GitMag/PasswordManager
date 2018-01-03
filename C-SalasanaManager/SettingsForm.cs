@@ -23,7 +23,7 @@ namespace C_SalasanaManager
         private void button1_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save(); // Saves settings in config file
-            File.WriteAllText(GlobalVariables.AppConfigLoc + "FTPpass.txt", StringCipher.Encrypt(textBoxFTPpass.Text, GlobalVariables.DecryptKey));
+                File.WriteAllText(GlobalVariables.AppConfigLoc + "FTPpass.txt", StringCipher.Encrypt(textBoxFTPpass.Text, GlobalVariables.DecryptKey));                   
             this.Close();
         }
 
@@ -46,7 +46,7 @@ namespace C_SalasanaManager
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            try
+            try //Backup stuff with BACKUP(orgininal name).txt
             {
                 FTPpass = File.ReadLines(GlobalVariables.AppConfigLoc + "FTPpass.txt").Skip(GlobalVariables.CurrentItem).Take(1).First(); //get encrypted ftp password from file
                 FTPpass = StringCipher.Decrypt(FTPpass, GlobalVariables.DecryptKey); //try to decrypt password using key
@@ -70,7 +70,7 @@ namespace C_SalasanaManager
             {
              
             
-            try
+            try //Load Backups from ftp server
             {
                 FTPpass = File.ReadLines(GlobalVariables.AppConfigLoc + "FTPpass.txt").Skip(GlobalVariables.CurrentItem).Take(1).First(); //get encrypted ftp password from file
                 FTPpass = StringCipher.Decrypt(FTPpass, GlobalVariables.DecryptKey); //try to decrypt password using key
@@ -88,5 +88,26 @@ namespace C_SalasanaManager
             }
         }
       }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Oletko varma että haluat vaihtaa pääsalasanan, sinun vanha salasanasi ei sen jälkeen enää toimi?", "Tuo varmuuskopiot?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                using (ChangeKey ChangeKey = new ChangeKey())
+                {
+                    ChangeKey.ShowDialog(this);                 
+                }
+                }
+            }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
