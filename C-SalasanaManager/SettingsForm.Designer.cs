@@ -31,22 +31,24 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxFTPpass = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxFTPuser = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxFTPaddress = new System.Windows.Forms.TextBox();
-            this.checkBoxUseFTP = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.checkBoxAskPassword = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBoxFTPuser = new System.Windows.Forms.TextBox();
+            this.textBoxFTPaddress = new System.Windows.Forms.TextBox();
+            this.checkBoxUseFTP = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -88,15 +90,6 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "FTP salasana:";
             // 
-            // textBoxFTPuser
-            // 
-            this.textBoxFTPuser.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::C_SalasanaManager.Properties.Settings.Default, "FTPuser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxFTPuser.Location = new System.Drawing.Point(9, 132);
-            this.textBoxFTPuser.Name = "textBoxFTPuser";
-            this.textBoxFTPuser.Size = new System.Drawing.Size(252, 26);
-            this.textBoxFTPuser.TabIndex = 5;
-            this.textBoxFTPuser.Text = global::C_SalasanaManager.Properties.Settings.Default.FTPuser;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -115,27 +108,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "FTP palvelimen osoite";
             // 
-            // textBoxFTPaddress
-            // 
-            this.textBoxFTPaddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::C_SalasanaManager.Properties.Settings.Default, "FTPaddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxFTPaddress.Location = new System.Drawing.Point(9, 80);
-            this.textBoxFTPaddress.Name = "textBoxFTPaddress";
-            this.textBoxFTPaddress.Size = new System.Drawing.Size(252, 26);
-            this.textBoxFTPaddress.TabIndex = 2;
-            this.textBoxFTPaddress.Text = global::C_SalasanaManager.Properties.Settings.Default.FTPaddress;
-            // 
-            // checkBoxUseFTP
-            // 
-            this.checkBoxUseFTP.AutoSize = true;
-            this.checkBoxUseFTP.Checked = global::C_SalasanaManager.Properties.Settings.Default.UploadFTP;
-            this.checkBoxUseFTP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "UploadFTP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBoxUseFTP.Location = new System.Drawing.Point(9, 26);
-            this.checkBoxUseFTP.Name = "checkBoxUseFTP";
-            this.checkBoxUseFTP.Size = new System.Drawing.Size(252, 24);
-            this.checkBoxUseFTP.TabIndex = 1;
-            this.checkBoxUseFTP.Text = "Lataa salasanavarasto ftp palvelimelle";
-            this.checkBoxUseFTP.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -146,6 +118,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBoxAskPassword);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.checkBox1);
@@ -166,31 +139,6 @@
             this.button4.Text = "Tarkista päivitykset";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = global::C_SalasanaManager.Properties.Settings.Default.PasswordPlainText;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "PasswordPlainText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox2.Location = new System.Drawing.Point(9, 71);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(232, 24);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Näytä salasana tavallisena tekstinä";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::C_SalasanaManager.Properties.Settings.Default.CopyClipboard;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "CopyClipboard", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox1.Location = new System.Drawing.Point(9, 25);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(217, 44);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Kopioi valitun sivuston salasana\r\nleikepöydälle automaattisesti";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // buttonSave
             // 
@@ -237,6 +185,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button5);
             this.groupBox4.Controls.Add(this.button3);
             this.groupBox4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(315, 269);
@@ -255,6 +204,82 @@
             this.button3.Text = "Vaihda pääsalasana";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // checkBoxAskPassword
+            // 
+            this.checkBoxAskPassword.AutoSize = true;
+            this.checkBoxAskPassword.Checked = global::C_SalasanaManager.Properties.Settings.Default.AskIfPasswordIsGood;
+            this.checkBoxAskPassword.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "AskIfPasswordIsGood", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBoxAskPassword.Location = new System.Drawing.Point(7, 97);
+            this.checkBoxAskPassword.Name = "checkBoxAskPassword";
+            this.checkBoxAskPassword.Size = new System.Drawing.Size(248, 44);
+            this.checkBoxAskPassword.TabIndex = 3;
+            this.checkBoxAskPassword.Text = "Salasanaa luotaessa kysy onko luotu\r\n salasan tyydyttävä";
+            this.checkBoxAskPassword.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = global::C_SalasanaManager.Properties.Settings.Default.PasswordPlainText;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "PasswordPlainText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox2.Location = new System.Drawing.Point(9, 71);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(232, 24);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Text = "Näytä salasana tavallisena tekstinä";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = global::C_SalasanaManager.Properties.Settings.Default.CopyClipboard;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "CopyClipboard", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox1.Location = new System.Drawing.Point(9, 25);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(217, 44);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Kopioi valitun sivuston salasana\r\nleikepöydälle automaattisesti";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBoxFTPuser
+            // 
+            this.textBoxFTPuser.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::C_SalasanaManager.Properties.Settings.Default, "FTPuser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBoxFTPuser.Location = new System.Drawing.Point(9, 132);
+            this.textBoxFTPuser.Name = "textBoxFTPuser";
+            this.textBoxFTPuser.Size = new System.Drawing.Size(252, 26);
+            this.textBoxFTPuser.TabIndex = 5;
+            this.textBoxFTPuser.Text = global::C_SalasanaManager.Properties.Settings.Default.FTPuser;
+            // 
+            // textBoxFTPaddress
+            // 
+            this.textBoxFTPaddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::C_SalasanaManager.Properties.Settings.Default, "FTPaddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBoxFTPaddress.Location = new System.Drawing.Point(9, 80);
+            this.textBoxFTPaddress.Name = "textBoxFTPaddress";
+            this.textBoxFTPaddress.Size = new System.Drawing.Size(252, 26);
+            this.textBoxFTPaddress.TabIndex = 2;
+            this.textBoxFTPaddress.Text = global::C_SalasanaManager.Properties.Settings.Default.FTPaddress;
+            // 
+            // checkBoxUseFTP
+            // 
+            this.checkBoxUseFTP.AutoSize = true;
+            this.checkBoxUseFTP.Checked = global::C_SalasanaManager.Properties.Settings.Default.UploadFTP;
+            this.checkBoxUseFTP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::C_SalasanaManager.Properties.Settings.Default, "UploadFTP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBoxUseFTP.Location = new System.Drawing.Point(9, 26);
+            this.checkBoxUseFTP.Name = "checkBoxUseFTP";
+            this.checkBoxUseFTP.Size = new System.Drawing.Size(252, 24);
+            this.checkBoxUseFTP.TabIndex = 1;
+            this.checkBoxUseFTP.Text = "Lataa salasanavarasto ftp palvelimelle";
+            this.checkBoxUseFTP.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 59);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(261, 30);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "Salasanaluojan asetukset";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -302,5 +327,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox checkBoxAskPassword;
+        private System.Windows.Forms.Button button5;
     }
 }

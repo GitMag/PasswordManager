@@ -82,5 +82,53 @@ namespace C_SalasanaManager.Properties {
                 this["PasswordPlainText"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AskIfPasswordIsGood {
+            get {
+                return ((bool)(this["AskIfPasswordIsGood"]));
+            }
+            set {
+                this["AskIfPasswordIsGood"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public decimal PasswordDefaultStrenght {
+            get {
+                return ((decimal)(this["PasswordDefaultStrenght"]));
+            }
+            set {
+                this["PasswordDefaultStrenght"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#%")]
+        public string passwordchars {
+            get {
+                return ((string)(this["passwordchars"]));
+            }
+            set {
+                this["passwordchars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CreateHardPassword {
+            get {
+                return ((bool)(this["CreateHardPassword"]));
+            }
+            set {
+                this["CreateHardPassword"] = value;
+            }
+        }
     }
 }

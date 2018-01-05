@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TextBoxUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.NumericUDlenght = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.ProgressbarPWstrenght = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -41,12 +40,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
+            this.NumericUDlenght = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxOldPass = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,9 +74,9 @@
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 25);
+            this.label1.Size = new System.Drawing.Size(204, 25);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Käyttäjänim/sähköposti:";
+            this.label1.Text = "Käyttäjänimi/sähköposti:";
             // 
             // TextBoxUsername
             // 
@@ -95,29 +95,6 @@
             this.label3.Size = new System.Drawing.Size(91, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Salasana:";
-            // 
-            // NumericUDlenght
-            // 
-            this.NumericUDlenght.Location = new System.Drawing.Point(75, 15);
-            this.NumericUDlenght.Maximum = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.NumericUDlenght.Minimum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.NumericUDlenght.Name = "NumericUDlenght";
-            this.NumericUDlenght.Size = new System.Drawing.Size(43, 20);
-            this.NumericUDlenght.TabIndex = 6;
-            this.NumericUDlenght.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.NumericUDlenght.ValueChanged += new System.EventHandler(this.NumericUDlenght_ValueChanged);
             // 
             // label4
             // 
@@ -194,6 +171,26 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Pituus:";
             // 
+            // NumericUDlenght
+            // 
+            this.NumericUDlenght.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::C_SalasanaManager.Properties.Settings.Default, "PasswordDefaultStrenght", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.NumericUDlenght.Location = new System.Drawing.Point(75, 15);
+            this.NumericUDlenght.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.NumericUDlenght.Minimum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.NumericUDlenght.Name = "NumericUDlenght";
+            this.NumericUDlenght.Size = new System.Drawing.Size(43, 20);
+            this.NumericUDlenght.TabIndex = 6;
+            this.NumericUDlenght.Value = global::C_SalasanaManager.Properties.Settings.Default.PasswordDefaultStrenght;
+            this.NumericUDlenght.ValueChanged += new System.EventHandler(this.NumericUDlenght_ValueChanged);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label6);
@@ -242,10 +239,10 @@
             this.Name = "AddNewItemForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lisää uusi salasana:";
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUDlenght)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
