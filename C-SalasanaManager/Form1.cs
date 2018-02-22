@@ -18,7 +18,7 @@ namespace C_SalasanaManager
     {
         string Username; // Read username from file based on Selected site
         string Strings; //random string you can store stuff in
-        string Password;
+        string Password; //read password from this string
         string EncryptedPassword;
         string site;
         string FTPpass;
