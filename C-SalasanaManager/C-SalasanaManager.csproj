@@ -64,6 +64,12 @@
     <Compile Include="ChangeKey.Designer.cs">
       <DependentUpon>ChangeKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomInfo.Designer.cs">
+      <DependentUpon>CustomInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="DecrypPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeKey.resx">
       <DependentUpon>ChangeKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomInfo.resx">
+      <DependentUpon>CustomInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DecrypPassword.resx">
       <DependentUpon>DecrypPassword.cs</DependentUpon>

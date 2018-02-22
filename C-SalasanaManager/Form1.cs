@@ -17,7 +17,9 @@ namespace C_SalasanaManager
     public partial class MainForm : Form
     {
         string Username; // Read username from file based on Selected site
+        string Strings; //random string you can store stuff in
         string Password;
+        string EncryptedPassword;
         string site;
         string FTPpass;
         string testDecrypt;
@@ -27,23 +29,21 @@ namespace C_SalasanaManager
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Directory.CreateDirectory(GlobalVariables.AppConfigLoc); //create directory where profiles are saved
-
-            
-            if (File.Exists(GlobalVariables.AppConfigLoc + "site.txt") == false) //check if this is first run
-            {
-                using (FirstRun FirstRun = new FirstRun()) //open decrypt form to decrypt passwords with master key
+            Directory.CreateDirectory(GlobalVariables.AppConfigLoc); //create directory where profiles are saved         
+                if (File.Exists(GlobalVariables.AppConfigLoc + "site.txt") == false) //check if this is first run
                 {
-                    FirstRun.ShowDialog(this);
-                    loadtext();
+                    using (FirstRun FirstRun = new FirstRun()) //open decrypt form to decrypt passwords with master key
+                    {
+                        FirstRun.ShowDialog(this);
+                        loadtext();
+                    }
                 }
-            }
-            else //if not first run
-            {
-                NeedKey();
-            }         
-            LoadSettings();
-            TestPass();
+                else //if not first run
+                {             
+                    NeedKey();
+                }                        
+                LoadSettings();
+                TestPass();      
         }
         void LoadSettings()
         {
@@ -64,15 +64,18 @@ namespace C_SalasanaManager
         }
         void TestPass() //test if the password the user gave is correct
         {
-            try
+            if (GlobalVariables.AllowExit == false) //only test password if we do not want to exit
             {
-                testDecrypt = File.ReadAllText(GlobalVariables.AppConfigLoc + "pswdTest.txt"); //This is used to test if key is correct
-                testDecrypt = StringCipher.Decrypt(testDecrypt, GlobalVariables.DecryptKey); //try to decrypt key
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    testDecrypt = File.ReadAllText(GlobalVariables.AppConfigLoc + "pswdTest.txt"); //This is used to test if key is correct
+                    testDecrypt = StringCipher.Decrypt(testDecrypt, GlobalVariables.DecryptKey); //try to decrypt key
+                }
+                catch (Exception)
+                {
 
-                NeedKey();
+                    NeedKey();
+                }
             }
         }
         void loadtext()
@@ -100,7 +103,27 @@ namespace C_SalasanaManager
         }
         private void ListboxSite_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateInfo();
             LoadUserDetails();
+        }
+        void UpdateInfo()
+        {
+            if (TextBoxUsername.Text != "" && TextBoxPassword.Text != "")
+            {       
+                if (Username != TextBoxUsername.Text || Password != TextBoxPassword.Text)
+                {
+                    if (MessageBox.Show("Olet tehnyt muutoksia käyttäjänimeent/salasanaan, haluatko tallentaa? \n" + Username + "=" + TextBoxUsername.Text + "\n" + Password + "=" + TextBoxPassword.Text, "Tallenna muutokset?",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Strings = File.ReadAllText(GlobalVariables.AppConfigLoc + "username.txt"); //replace username
+                        Strings = Strings.Replace(Username, TextBoxUsername.Text);
+                        File.WriteAllText(GlobalVariables.AppConfigLoc + "username.txt", Strings);
+
+                        Strings = File.ReadAllText(GlobalVariables.AppConfigLoc + "password.txt");
+                        Strings = Strings.Replace(EncryptedPassword, StringCipher.Encrypt(TextBoxPassword.Text, GlobalVariables.DecryptKey));
+                        File.WriteAllText(GlobalVariables.AppConfigLoc + "password.txt", Strings);
+                    }
+                }
+            }
         }
         void DownloadFTP() //Download files from ftp server
         {
@@ -151,8 +174,8 @@ namespace C_SalasanaManager
             {
                 GlobalVariables.CurrentItem = ListboxSite.SelectedIndex;
                 Username = File.ReadLines(GlobalVariables.AppConfigLoc + "username.txt").Skip(GlobalVariables.CurrentItem).Take(1).First();
-                Password = File.ReadLines(GlobalVariables.AppConfigLoc + "password.txt").Skip(GlobalVariables.CurrentItem).Take(1).First();
-                Password = StringCipher.Decrypt(Password, GlobalVariables.DecryptKey);
+                EncryptedPassword = File.ReadLines(GlobalVariables.AppConfigLoc + "password.txt").Skip(GlobalVariables.CurrentItem).Take(1).First();
+                Password = StringCipher.Decrypt(EncryptedPassword, GlobalVariables.DecryptKey);
                 Console.WriteLine(Username);
                 Console.WriteLine(Password);
                 TextBoxUsername.Text = Username;
@@ -236,7 +259,29 @@ namespace C_SalasanaManager
                 }
             }            
         }
-            
+
+        private void ButtonEditItem_Click_1(object sender, EventArgs e)
+        {
+            try //try to open editform
+            {
+                using (EditItemForm EditItem = new EditItemForm())
+                {
+                    EditItem.ShowDialog(this);
+                }
+            }
+            catch (Exception) //show error if nothing was selected
+            {
+                MessageBox.Show("Valittua salasanaa ei voida avata.");
+            }
+        }
+
+        private void labelShowAdditionalInfo_Click(object sender, EventArgs e)
+        {
+            using (CustomInfo CustomInfo = new CustomInfo())
+            {
+                CustomInfo.ShowDialog(this);
+            }
+        }
     }
     public static class GlobalVariables //can be accesed from anywhere
     {

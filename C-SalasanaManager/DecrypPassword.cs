@@ -43,5 +43,20 @@ namespace C_SalasanaManager
                 ButtonUseLocal.Visible = true;
             }
         }
+
+        private void TextBoxKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                GlobalVariables.DecryptKey = TextBoxKey.Text;
+                this.Close();
+            }
+        }
+
+        private void DecryptPassword_FormClosing(object sender, FormClosingEventArgs e)
+        {
+ 
+        }
+           
     }
 }

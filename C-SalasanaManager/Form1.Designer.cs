@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelShowAdditionalInfo = new System.Windows.Forms.Label();
             this.TextBoxPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TextBoxUsername = new System.Windows.Forms.TextBox();
@@ -37,6 +38,7 @@
             this.ListboxSite = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ButtonEditItem = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.ButttonSearchItem = new System.Windows.Forms.Button();
             this.ButtonAddItem = new System.Windows.Forms.Button();
@@ -47,6 +49,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelShowAdditionalInfo);
             this.groupBox1.Controls.Add(this.TextBoxPassword);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.TextBoxUsername);
@@ -58,10 +61,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tiedot";
             // 
+            // labelShowAdditionalInfo
+            // 
+            this.labelShowAdditionalInfo.AutoSize = true;
+            this.labelShowAdditionalInfo.Location = new System.Drawing.Point(8, 151);
+            this.labelShowAdditionalInfo.Name = "labelShowAdditionalInfo";
+            this.labelShowAdditionalInfo.Size = new System.Drawing.Size(70, 15);
+            this.labelShowAdditionalInfo.TabIndex = 4;
+            this.labelShowAdditionalInfo.Text = "Näytä lisätiedot";
+            this.labelShowAdditionalInfo.Click += new System.EventHandler(this.labelShowAdditionalInfo_Click);
+            // 
             // TextBoxPassword
             // 
             this.TextBoxPassword.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxPassword.Location = new System.Drawing.Point(12, 121);
+            this.TextBoxPassword.Location = new System.Drawing.Point(11, 109);
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.Size = new System.Drawing.Size(186, 29);
             this.TextBoxPassword.TabIndex = 3;
@@ -70,7 +83,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 93);
+            this.label3.Location = new System.Drawing.Point(6, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 25);
             this.label3.TabIndex = 2;
@@ -105,7 +118,7 @@
             "pelikone.fi"});
             this.ListboxSite.Location = new System.Drawing.Point(13, 37);
             this.ListboxSite.Name = "ListboxSite";
-            this.ListboxSite.Size = new System.Drawing.Size(236, 349);
+            this.ListboxSite.Size = new System.Drawing.Size(236, 372);
             this.ListboxSite.TabIndex = 1;
             this.ListboxSite.SelectedIndexChanged += new System.EventHandler(this.ListboxSite_SelectedIndexChanged);
             // 
@@ -121,21 +134,33 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ButtonEditItem);
             this.groupBox2.Controls.Add(this.buttonSettings);
             this.groupBox2.Controls.Add(this.ButttonSearchItem);
             this.groupBox2.Controls.Add(this.ButtonAddItem);
             this.groupBox2.Controls.Add(this.ButtonDeleteItem);
             this.groupBox2.Location = new System.Drawing.Point(264, 213);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(215, 184);
+            this.groupBox2.Size = new System.Drawing.Size(215, 207);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Työkalut";
             // 
+            // ButtonEditItem
+            // 
+            this.ButtonEditItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonEditItem.Location = new System.Drawing.Point(6, 55);
+            this.ButtonEditItem.Name = "ButtonEditItem";
+            this.ButtonEditItem.Size = new System.Drawing.Size(197, 35);
+            this.ButtonEditItem.TabIndex = 5;
+            this.ButtonEditItem.Text = "Muokkaa valittua";
+            this.ButtonEditItem.UseVisualStyleBackColor = true;
+            this.ButtonEditItem.Click += new System.EventHandler(this.ButtonEditItem_Click_1);
+            // 
             // buttonSettings
             // 
             this.buttonSettings.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSettings.Location = new System.Drawing.Point(6, 142);
+            this.buttonSettings.Location = new System.Drawing.Point(6, 165);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(197, 35);
             this.buttonSettings.TabIndex = 4;
@@ -146,7 +171,7 @@
             // ButttonSearchItem
             // 
             this.ButttonSearchItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButttonSearchItem.Location = new System.Drawing.Point(6, 101);
+            this.ButttonSearchItem.Location = new System.Drawing.Point(6, 128);
             this.ButttonSearchItem.Name = "ButttonSearchItem";
             this.ButttonSearchItem.Size = new System.Drawing.Size(197, 35);
             this.ButttonSearchItem.TabIndex = 3;
@@ -157,7 +182,7 @@
             // ButtonAddItem
             // 
             this.ButtonAddItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonAddItem.Location = new System.Drawing.Point(6, 60);
+            this.ButtonAddItem.Location = new System.Drawing.Point(6, 19);
             this.ButtonAddItem.Name = "ButtonAddItem";
             this.ButtonAddItem.Size = new System.Drawing.Size(197, 35);
             this.ButtonAddItem.TabIndex = 2;
@@ -168,7 +193,7 @@
             // ButtonDeleteItem
             // 
             this.ButtonDeleteItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonDeleteItem.Location = new System.Drawing.Point(6, 19);
+            this.ButtonDeleteItem.Location = new System.Drawing.Point(6, 92);
             this.ButtonDeleteItem.Name = "ButtonDeleteItem";
             this.ButtonDeleteItem.Size = new System.Drawing.Size(197, 35);
             this.ButtonDeleteItem.TabIndex = 1;
@@ -181,7 +206,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(493, 397);
+            this.ClientSize = new System.Drawing.Size(487, 425);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ListboxSite);
@@ -219,6 +244,8 @@
         private System.Windows.Forms.Button ButtonDeleteItem;
         private System.Windows.Forms.Button ButttonSearchItem;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Button ButtonEditItem;
+        private System.Windows.Forms.Label labelShowAdditionalInfo;
     }
 }
 

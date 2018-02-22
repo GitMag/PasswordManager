@@ -58,12 +58,13 @@ namespace C_SalasanaManager
             File.AppendAllText(GlobalVariables.AppConfigLoc + "password.txt", StringCipher.Encrypt(password, GlobalVariables.DecryptKey) + Environment.NewLine); //add password to password text file
             File.AppendAllText(GlobalVariables.AppConfigLoc + "username.txt", TextBoxUsername.Text + Environment.NewLine); //add Username to text file
             File.AppendAllText(GlobalVariables.AppConfigLoc + "site.txt", TextBoxSiteName.Text + Environment.NewLine); //add site name to text file
-            this.Close();
+            File.AppendAllText(GlobalVariables.AppConfigLoc + "custominfo.txt", StringCipher.Encrypt("Tänne voit lisätä salasanaan liittyviä lisätietoja!", GlobalVariables.DecryptKey) + Environment.NewLine); //add site name to text file
+                this.Close();
             }
         }
             public string CreatePassword(int length) 
          {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#%";
+            string valid = Properties.Settings.Default["passwordchars"].ToString();
             StringBuilder res = new StringBuilder();
             Random rnd = new Random();
             while (0 < length--)

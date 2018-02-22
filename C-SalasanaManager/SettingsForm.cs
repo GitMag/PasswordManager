@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.IO;
 
 namespace C_SalasanaManager
 {
@@ -55,6 +56,8 @@ namespace C_SalasanaManager
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPsite.txt", GlobalVariables.AppConfigLoc + "site.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPusername.txt", GlobalVariables.AppConfigLoc + "username.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpassword.txt", GlobalVariables.AppConfigLoc + "password.txt");
+                client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpswdTest.txt", GlobalVariables.AppConfigLoc + "pswdTest.txt");
+                client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPFTPpass.txt", GlobalVariables.AppConfigLoc + "FTPpass.txt");
                 MessageBox.Show("Varmuuskopiointi onnistui!");
                 client.Dispose();
             }
@@ -79,12 +82,15 @@ namespace C_SalasanaManager
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPsite.txt", GlobalVariables.AppConfigLoc + "site.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPusername.txt", GlobalVariables.AppConfigLoc + "username.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpassword.txt", GlobalVariables.AppConfigLoc + "password.txt");
-                MessageBox.Show("Tuonti onnistui!");
+                client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpswdTest.txt", GlobalVariables.AppConfigLoc + "pswdTest.txt");
+                client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPFTPpass.txt", GlobalVariables.AppConfigLoc + "FTPpass.txt");
+                MessageBox.Show("Tuonti onnistui! Ohjelma uudlellenkäynnistyy jotta salasanavarasto voidaan päivittää.");
+                Application.Restart();
                 client.Dispose();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Virhe tapahtui.Tarkista että FTP-tunnukset ovat oikein.");
+                MessageBox.Show("Virhe tapahtui.Tarkista että FTP-tunnukset ovat oikein. Tarkemmat tiedot:\n" + ex.ToString());
             }
         }
       }
@@ -108,6 +114,36 @@ namespace C_SalasanaManager
         private void button4_Click_1(object sender, EventArgs e)
         {
             
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string sourcePath = GlobalVariables.AppConfigLoc;
+            string targetPath = Environment.SpecialFolder.Desktop + @"\PasswordManagerBACKUP";
+            if (!Directory.Exists(targetPath))
+            {
+                Directory.CreateDirectory(targetPath);
+            }
+            foreach (var srcPath in Directory.GetFiles(sourcePath))
+            {
+                //Copy the file from sourcepath and place into mentioned target path, 
+                //Overwrite the file if same file is exist in target path
+                File.Copy(srcPath, srcPath.Replace(sourcePath, targetPath), true);
+            }
+            MessageBox.Show("Tiedostot kopioitu kohteeseen: " + targetPath);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            using (PasswordCreatorSettings GeneratorSettings = new PasswordCreatorSettings())
+            {
+                GeneratorSettings.ShowDialog(this);
+            }
         }
     }
 }

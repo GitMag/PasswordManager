@@ -53,6 +53,7 @@
             this.TextBoxKey.PasswordChar = '*';
             this.TextBoxKey.Size = new System.Drawing.Size(260, 29);
             this.TextBoxKey.TabIndex = 4;
+            this.TextBoxKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKey_KeyDown);
             // 
             // ButtonDecrypt
             // 
@@ -95,6 +96,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Salasana Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DecryptPassword_FormClosing);
             this.Load += new System.EventHandler(this.DecryptPassword_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
