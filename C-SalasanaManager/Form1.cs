@@ -137,6 +137,7 @@ namespace C_SalasanaManager
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/site.txt", GlobalVariables.AppConfigLoc + "site.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/username.txt", GlobalVariables.AppConfigLoc + "username.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/password.txt", GlobalVariables.AppConfigLoc + "password.txt");
+                client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/custominfo.txt", GlobalVariables.AppConfigLoc + "custominfo.txt");
                 client.Dispose();
                 loadtext(); //load text from file to Site list
                 LoadUserDetails();
@@ -158,7 +159,8 @@ namespace C_SalasanaManager
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/site.txt", GlobalVariables.AppConfigLoc + "site.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/username.txt", GlobalVariables.AppConfigLoc + "username.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/password.txt", GlobalVariables.AppConfigLoc + "password.txt");
-                client.Dispose();
+                client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/custominfo.txt", GlobalVariables.AppConfigLoc + "custominfo.txt");
+            client.Dispose();
            // }
            // catch (Exception)
            // {
@@ -182,7 +184,15 @@ namespace C_SalasanaManager
                 TextBoxPassword.Text = Password;
                 site = ListboxSite.SelectedItem.ToString();
                 Console.WriteLine(site);
-
+                    //change text to display username or email depending if username contains @ and .
+                    if (Username.Contains("@") && Username.Contains("."))
+                    {
+                        label2.Text = "Sähköposti:";
+                    }
+                    else
+                    {
+                        label2.Text = "Käyttäjänimi:";
+                    }
 
                     //settings test
                     if (Properties.Settings.Default["CopyClipboard"].ToString() == "True")
@@ -215,6 +225,9 @@ namespace C_SalasanaManager
             var file2 = new List<string>(System.IO.File.ReadAllLines(GlobalVariables.AppConfigLoc + "password.txt")); //remove password from file
             file2.RemoveAt(GlobalVariables.CurrentItem);
             File.WriteAllLines(GlobalVariables.AppConfigLoc + "password.txt", file2.ToArray());
+            var file3 = new List<string>(System.IO.File.ReadAllLines(GlobalVariables.AppConfigLoc + "custominfo.txt")); //remove site name from file
+            file3.RemoveAt(GlobalVariables.CurrentItem);
+            File.WriteAllLines(GlobalVariables.AppConfigLoc + "custominfo.txt", file3.ToArray());
             loadtext();
         }
 

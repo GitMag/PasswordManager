@@ -58,6 +58,7 @@ namespace C_SalasanaManager
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpassword.txt", GlobalVariables.AppConfigLoc + "password.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpswdTest.txt", GlobalVariables.AppConfigLoc + "pswdTest.txt");
                 client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPFTPpass.txt", GlobalVariables.AppConfigLoc + "FTPpass.txt");
+                client.UploadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPFTPcustominfo.txt", GlobalVariables.AppConfigLoc + "custominfo.txt");
                 MessageBox.Show("Varmuuskopiointi onnistui!");
                 client.Dispose();
             }
@@ -84,7 +85,8 @@ namespace C_SalasanaManager
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpassword.txt", GlobalVariables.AppConfigLoc + "password.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPpswdTest.txt", GlobalVariables.AppConfigLoc + "pswdTest.txt");
                 client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPFTPpass.txt", GlobalVariables.AppConfigLoc + "FTPpass.txt");
-                MessageBox.Show("Tuonti onnistui! Ohjelma uudlellenkäynnistyy jotta salasanavarasto voidaan päivittää.");
+                client.DownloadFile(Properties.Settings.Default["FTPaddress"].ToString() + "/BACKUPcustominfo.txt", GlobalVariables.AppConfigLoc + "custominfo.txt");
+                    MessageBox.Show("Tuonti onnistui! Ohjelma uudlellenkäynnistyy jotta salasanavarasto voidaan päivittää.");
                 Application.Restart();
                 client.Dispose();
             }

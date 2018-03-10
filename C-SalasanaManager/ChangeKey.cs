@@ -43,7 +43,12 @@ namespace C_SalasanaManager
             _password = StringCipher.Decrypt(_password, GlobalVariables.DecryptKey); //decrypt using old key
             _password = StringCipher.Encrypt(_password, textBoxNewKey.Text); //encrypt using new kkey
             File.WriteAllText(GlobalVariables.AppConfigLoc + "pswdtest.txt", _password); //write encrypted FTP pass to file
-            GlobalVariables.DecryptKey = textBoxNewKey.Text; //update new key to config (so FTP can upload)
+
+            //_password = File.ReadAllText(GlobalVariables.AppConfigLoc + "custominfo.txt"); //read encrypted custom text
+            //_password = StringCipher.Decrypt(_password, GlobalVariables.DecryptKey); //decrypt using old key
+           // _password = StringCipher.Encrypt(_password, textBoxNewKey.Text); //encrypt using new kkey
+            //File.WriteAllText(GlobalVariables.AppConfigLoc + "custominfo.txt", _password); //write encrypted custom info to file
+            GlobalVariables.DecryptKey = textBoxNewKey.Text; //update new key to config
             MessageBox.Show("Pääsalasana vaihdettu!"); //display success message
             this.Close();
         }
